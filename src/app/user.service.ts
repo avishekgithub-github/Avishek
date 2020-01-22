@@ -1,37 +1,60 @@
 import { Injectable } from '@angular/core';
 import { v4 as uuid } from 'uuid';
-import { ToastrService } from 'ngx-toastr';
+import {ToastrService} from 'ngx-toastr';
+import { BehaviorSubject, Subject } from 'rxjs';
+
+
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
+ // mail: any;
+ // pswrd: any;
+ private source = new BehaviorSubject("");
+ currentmessage= this.source.asObservable();
+  currentMessage: any;
 
-  constructor(private toastr: ToastrService) {}
+  constructor(private toasterservice: ToastrService) { }
 
-   login(data) {
+  changeMessage(message:string)
+  {
+    this.source.next(message);
+  }
 
-    console.log("Data...",data);
 
-   if(data.email=="avishekbhaumick@gmail.com" && data.pswd=="1234567"){
-   console.log('logged in');
-   let id = uuid();
-   console.log('my id.....',id);
-   localStorage.setItem("ID",id);
-   return true;
-   }
-   else{
-     console.log('no data');
-     return false;
-   }
+  login(data)
+  {
+   let mail = data.email;
+   let pswrd = data.password;
+
+   if(mail=="abc@gmail.com" && pswrd=="sahaa")
+  {
+      console.log("Login successfull");
+      let id = uuid();
+      console.log("my id :==: ",id);
+      localStorage.setItem("ID",id);
+      return true;
   }
-   alertForSuccess(message,title){
-    this.toastr.success(message, title);
+  else{
+    console.log("Invalid Entry");
+    return false;
   }
-  alertForWarning(message,title){
-    this.toastr.warning(message, title);
+
   }
-  alertFordanger(message,title){
-    this.toastr.error(message, title);
-  }
+
+alertForSuccess(message,title)
+{
+  this.toasterservice.success(message,title);
+}
+alertforwarning(message,title)
+{
+  this.toasterservice.warning(message,title);
+}
+alertfordanger(message,title)
+{
+  this.toasterservice.error(message,title);
+}
+
+
 }

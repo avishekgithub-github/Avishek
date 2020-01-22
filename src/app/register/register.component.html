@@ -1,0 +1,24 @@
+<body style="color: burlywood;" class="bodyy">
+    
+    <h1 > Register </h1>
+<form [formGroup]="registerform" (ngSubmit)="registered()">
+
+    First Name : <input type ="text" placeholder="Name" formControlName="fname"/>
+    <br><br>
+    Email : <input type="email" placeholder="abc@gmail.com" formControlName="mail"/>
+    <br><br>
+    Password : <input type="password" placeholder="abc@gmail.com" formControlName="pass"/>
+    <br><br>
+
+    
+    <div>
+        <label for="gender"> Gender: </label>
+        <input type="radio" value="Male"  id="pwd" formControlName="gender">Male
+        <input type="radio" value="Female" id="pwd" formControlName="gender">Female
+    </div>
+
+
+    <button>submit</button>
+
+</form>
+</body>
